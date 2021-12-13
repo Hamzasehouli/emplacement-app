@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 exports.signup = async function (req, res, next) {
-  console.log("jjjjj");
   try {
     const { email, password } = req.body;
 
@@ -16,24 +15,25 @@ exports.signup = async function (req, res, next) {
     if (!password.trim() || password.trim().length < 8) {
       return;
     }
-
-    bcrypt.hash(password, 12, async function (err, hash) {
-      const user = await User.create({ email, password: hash });
-      jwt.sign(
-        {
-          id: user.id,
-        },
-        process.env.JWT_SECRET_KEY,
-        { expiresIn: 60 * 60 },
-        function (err, token) {
-          res.cookie("jwt", token);
-          res.status(201).json({
-            status: "success",
-            data: { user },
-          });
-        }
-      );
+    const user = await User.create({
+      email,
+      password,
     });
+
+    jwt.sign(
+      {
+        id: user.id,
+      },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: 60 * 60 },
+      function (err, token) {
+        res.cookie("jwt", token);
+        res.status(201).json({
+          status: "success",
+          data: { user },
+        });
+      }
+    );
   } catch (err) {}
 };
 
@@ -53,25 +53,58 @@ exports.login = async function (req, res, next) {
     const user = await User.findOne({ email });
 
     if (!user) return;
-    bcrypt.compare(password, user.password, function (err, result) {
-      if (result) {
-        jwt.sign(
-          {
-            id: user.id,
-          },
-          process.env.JWT_SECRET_KEY,
-          { expiresIn: 60 * 60 },
-          function (err, token) {
-            res.cookie("jwt", token);
-            res.status(200).json({
-              status: "success",
-              data: { user },
-            });
-          }
-        );
-      }
-    });
+    const result = await user.verifyPassword(user, password);
+    if (result) {
+      jwt.sign(
+        {
+          id: user.id,
+        },
+        process.env.JWT_SECRET_KEY,
+        { expiresIn: 60 * 60 },
+        function (err, token) {
+          res.cookie("jwt", token);
+          res.status(200).json({
+            status: "success",
+            data: { user },
+          });
+        }
+      );
+    }
   } catch (err) {
     console.log(err);
   }
+};
+
+exports.isLoggedIn = async function (req, res, next) {
+  try {
+    const token = req.cookies?.jwt;
+    if (!jwt) {
+      return console.log("your are not logged in");
+    }
+    jwt.verify(
+      token,
+      process.env.JWT_SECRET_KEY,
+      async function (err, decoded) {
+        if (!decoded) {
+          return console.log("token not valid");
+        }
+
+        const user = await User.findById(decoded.id);
+
+        if (!user) {
+          console.log("User not found");
+        }
+
+        console.log(decoded.iat);
+        console.log(new Date(user.passwordModifiedAt).getTime() / 1000);
+        if (decoded.iat < new Date(user.passwordModifiedAt).getTime() / 1000) {
+          console.log("not valid");
+          return;
+        }
+        req.user = user;
+        next();
+      }
+    );
+    return;
+  } catch (err) {}
 };
