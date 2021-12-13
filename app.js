@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
-const questionRoutes = require("./routes/questionRoutes");
+// const questionRoutes = require("./routes/questionRoutes");
 
 const app = express();
 
@@ -17,7 +17,6 @@ app.use((req, res, next) => {
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/questions", questionRoutes);
 
 app.all("*", (req, res, next) => {
   next("err");

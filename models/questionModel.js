@@ -7,11 +7,12 @@ const questionSchema = new mongoose.Schema({
   content: {
     type: String,
   },
-  location: {
-    type: {},
-  },
+  // location: {
+  //   type: {},
+  // },
   user: {
     type: mongoose.Schema.ObjectId,
+    unique: true,
   },
   responses: {
     type: [mongoose.Schema.ObjectId],
