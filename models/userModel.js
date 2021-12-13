@@ -1,13 +1,18 @@
 const mongoose = require("mongoose");
-const bcrypt = require(bcrypt);
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
     email: {
       type: String,
+      required: [true, "Please enter a valid email"],
     },
     password: {
       type: String,
+      required: [
+        true,
+        "Please enter a password, a valid password must contain at least 8 characters",
+      ],
     },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
