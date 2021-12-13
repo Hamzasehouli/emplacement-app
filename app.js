@@ -1,9 +1,11 @@
-const express = requier("express");
+const express = require("express");
 
 const app = express();
 
 app.use(express.json());
 
-app.use();
+app.use(() => {
+  console.log(new Date());
+});
 
-export default app;
+module.exports = app;
