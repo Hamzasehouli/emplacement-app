@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema(
         "Please enter a password, a valid password must contain at least 8 characters",
       ],
     },
+    createdAt: {
+      type: Date,
+      default: new Date(),
+    },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
