@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 var session = require("express-session");
@@ -5,6 +6,7 @@ var Keycloak = require("keycloak-connect");
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const viewRoutes = require("./routes/viewRoutes");
 
 const app = express();
 app.use(
@@ -36,8 +38,12 @@ app.use((req, res, next) => {
   next();
 });
 
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
+app.use("/", viewRoutes);
 
 app.all("*", (req, res, next) => {
   next("err");
