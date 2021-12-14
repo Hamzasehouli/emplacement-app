@@ -7,9 +7,17 @@ const questionSchema = new mongoose.Schema({
   content: {
     type: String,
   },
-  // location: {
-  //   type: {},
-  // },
+  location: {
+    type: {
+      type: String, // Don't do `{ location: { type: String } }`
+      enum: ["Point"], // 'location.type' must be 'Point'
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  },
   user: {
     type: mongoose.Schema.ObjectId,
     unique: true,

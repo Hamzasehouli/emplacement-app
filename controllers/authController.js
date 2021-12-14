@@ -15,6 +15,8 @@ exports.signup = async function (req, res, next) {
     if (!password.trim() || password.trim().length < 8) {
       return;
     }
+
+    console.log(res);
     const user = await User.create({
       email,
       password,
@@ -34,7 +36,9 @@ exports.signup = async function (req, res, next) {
         });
       }
     );
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 exports.login = async function (req, res, next) {

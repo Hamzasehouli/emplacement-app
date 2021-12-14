@@ -20,6 +20,10 @@ exports.postQuestion = async function (req, res, next) {
       title,
       content,
       user: req.user.id,
+      location: {
+        type: "Point",
+        coordinates: [-5.79975, 35.76727],
+      },
     });
 
     res.status(201).json({
