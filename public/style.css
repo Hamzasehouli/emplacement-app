@@ -87,7 +87,8 @@ button {
 }
 
 .section-login,
-.section-signup {
+.section-signup,
+.section-ask {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -134,4 +135,20 @@ button {
 .form-search {
   display: flex;
   width: 40%;
+}
+
+.hero {
+  background-color: rgb(243, 237, 243);
+  height: 70vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 10rem 0 0 10rem;
+}
+
+.hero h1 {
+  font-size: 5rem;
+  width: 60%;
+  margin-bottom: 4rem;
 }
