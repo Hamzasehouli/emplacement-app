@@ -1,4 +1,11 @@
 extends base
 
 block content
-    h1 signup
+    section.section-signup 
+        form.form.signup-form
+            div.form__control
+                input(placeholder="Email" type="email")
+            div.form__control
+                input(placeholder="Password" type="password")
+            button(type="submit") Signup 
+            a(href="/signup") Login 
