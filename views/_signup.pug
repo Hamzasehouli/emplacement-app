@@ -3,9 +3,10 @@ extends base
 block content
     section.section-signup 
         form.form.signup-form
+            h2 Sign up
             div.form__control
-                input(placeholder="Email" type="email")
+                input.form__input(placeholder="Email" type="email")
             div.form__control
-                input(placeholder="Password" type="password")
-            button(type="submit") Signup 
+                input.form__input(placeholder="Password" type="password")
+            button.btn-flat(style="margin-right:10px" type="submit") Sign up 
             a(href="/signup") Login 
