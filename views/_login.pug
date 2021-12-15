@@ -6,7 +6,9 @@ block content
             h2 Log in 
             div.form__control
                 input.form__input#email(placeholder="Email" type="email")
+                p.form__error.email-error.hidden Please anter a valid email
             div.form__control
                 input.form__input#password(placeholder="Password" type="password")
-            button.btn-flat(style="margin-right:10px" type="submit") Login
+                p.form__error.password-error.hidden Please anter a valid password
+            button.btn-flat.login-btn(style="margin-right:10px" type="submit") Login
             a(href="/signup") Signup 

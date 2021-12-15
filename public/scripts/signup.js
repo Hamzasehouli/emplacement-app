@@ -3,10 +3,12 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const emailError = document.querySelector(".email-error");
 const passwordError = document.querySelector(".password-error");
+const signupBtn = document.querySelector(".signup-btn");
 
 export default signupForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
   try {
+    signupBtn.innerText = "...wait";
     emailError.classList.add("hidden");
     passwordError.classList.add("hidden");
     let isEmailCorrect = true;
@@ -14,11 +16,13 @@ export default signupForm?.addEventListener("submit", async (e) => {
     if (!email.value.trim()) {
       emailError.classList.remove("hidden");
       isEmailCorrect = false;
+      signupBtn.innerText = "Signup";
     }
 
     if (!password.value.trim() || password.value.trim().length < 8) {
       passwordError.classList.remove("hidden");
       isPasswordCorrect = false;
+      signupBtn.innerText = "Signup";
     }
 
     if (!isEmailCorrect && !isPasswordCorrect) return;
@@ -30,13 +34,12 @@ export default signupForm?.addEventListener("submit", async (e) => {
       },
       body: JSON.stringify({ email: email.value, password: password.value }),
     });
-    console.log(res);
-    const data = await res.json();
-    console.log(data);
+
     if (res.ok) {
       setTimeout(() => {
         location.replace("/");
       }, 2000);
     }
+    signupBtn.innerText = "Signup";
   } catch (err) {}
 });
