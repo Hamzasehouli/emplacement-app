@@ -6,7 +6,9 @@ block content
             h2 Add a question 
             div.form__control
                 input.form__input#title(placeholder="Title" type="text")
+                p.form__error.title-error.hidden Please anter a valid title
             div.form__control
                 textarea.form__input#content(placeholder="Write a question here" )
-            button.btn-flat(style="margin-right:10px" type="submit") Add
+                p.form__error.content-error.hidden Please anter a valid content
+            button.btn-flat.ask-btn(style="margin-right:10px" type="submit") Add
             

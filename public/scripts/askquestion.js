@@ -1,10 +1,31 @@
 const askForm = document.querySelector(".ask-form");
 const title = document.getElementById("title");
 const content = document.getElementById("content");
+const titleError = document.querySelector(".title-error");
+const contentError = document.querySelector(".content-error");
+const askBtn = document.querySelector(".ask-btn");
 
 export default askForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
   try {
+    askBtn.innerText = "...wait";
+    titleError.classList.add("hidden");
+    contentError.classList.add("hidden");
+
+    let isTitleCorrect = true;
+    let isContentCorrect = true;
+
+    if (!title.value.trim()) {
+      titleError.classList.remove("hidden");
+      isTitleCorrect = false;
+      askBtn.innerText = "Add";
+    }
+    if (!content.value.trim()) {
+      contentError.classList.remove("hidden");
+      isContentCorrect = false;
+      askBtn.innerText = "Add";
+    }
+
     // console.log(title.value, content.value);
     // console.log(askForm.dataset.userid);
 
@@ -19,6 +40,8 @@ export default askForm?.addEventListener("submit", async (e) => {
 
     // console.log(latitude);
     // console.log(longitude);
+    if ((!isTitleCorrect && !isContentCorrect) || !latitude || !longitude)
+      return;
 
     const res = await fetch(
       `http://localhost:3000/api/v1/users/${askForm.dataset.userid}/latitude/${latitude}/longitude/${longitude}/questions`,
