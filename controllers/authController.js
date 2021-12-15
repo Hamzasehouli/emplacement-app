@@ -10,11 +10,11 @@ exports.signup = async function (req, res, next) {
       !email.trim().includes("@") ||
       !email.trim().split("@")[1].includes(".")
     ) {
-      next("err");
+      next("Email is not valid");
       return;
     }
     if (!password.trim() || password.trim().length < 8) {
-      next("err");
+      next("Password is not valid");
       return;
     }
 
@@ -38,7 +38,7 @@ exports.signup = async function (req, res, next) {
       }
     );
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };
 

@@ -9,6 +9,7 @@ var Keycloak = require("keycloak-connect");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const viewRoutes = require("./routes/viewRoutes");
+const errorController = require("./controllers/errorController");
 
 const app = express();
 app.use(express.json());
@@ -51,11 +52,11 @@ app.use("/api/v1/users", userRoutes);
 app.use("/", viewRoutes);
 
 app.all("*", (req, res, next) => {
-  next("err");
+  next("No route found with this path");
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
+  errorController.catchError(err, req, res, next);
 });
 
 module.exports = app;
