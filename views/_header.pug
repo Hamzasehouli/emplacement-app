@@ -4,12 +4,15 @@ nav.nav
     //- form.form-search
     //-     input(type="text" placeholder="search ")
     //-     button.btn-flat(type="submit") Ask    
-    ul.nav__list 
-        li.nav__item 
-            a.nav__link(href="/login") Login  
-        li.nav__item 
-            a.nav__link(href="/signup") Signup  
-        //- li.nav__item 
-        //-     button.nav__link Logout  
-        //- li.nav__item 
-        //-     p user@email.com  
+    ul.nav__list
+        if(!user)
+            li.nav__item 
+                a.nav__link(href="/login") Login  
+            li.nav__item 
+                a.nav__link(href="/signup") Signup 
+        else
+            
+            li.nav__item 
+                span( style="display:inline;cursor:pointer").nav__link.logout Logout  
+            li.nav__item 
+                p #{user.email}  

@@ -1,4 +1,6 @@
 const bcrypt = require("bcrypt");
+const read = require("body-parser/lib/read");
+const req = require("express/lib/request");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 exports.signup = async function (req, res, next) {
@@ -83,27 +85,28 @@ exports.login = async function (req, res, next) {
 exports.isLoggedIn = async function (req, res, next) {
   try {
     const token = req.cookies?.jwt;
+    console.log(token);
     if (!jwt) {
-      return console.log("your are not logged in");
+      return next("your are not logged in");
     }
     jwt.verify(
       token,
       process.env.JWT_SECRET_KEY,
       async function (err, decoded) {
         if (!decoded) {
-          return console.log("token not valid");
+          return next("token not valid");
         }
 
         const user = await User.findById(decoded.id);
 
         if (!user) {
-          console.log("User not found");
+          next("User not found");
         }
 
-        console.log(decoded.iat);
-        console.log(new Date(user.passwordModifiedAt).getTime() / 1000);
+        // console.log(decoded.iat);
+        // console.log(new Date(user.passwordModifiedAt).getTime() / 1000);
         if (decoded.iat < new Date(user.passwordModifiedAt).getTime() / 1000) {
-          console.log("not valid");
+          next("not valid");
           return;
         }
         req.user = user;
@@ -111,5 +114,40 @@ exports.isLoggedIn = async function (req, res, next) {
       }
     );
     return;
-  } catch (err) {}
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getUser = async function (req, res, next) {
+  const token = req.cookies.jwt;
+  if (!jwt) {
+    req.user = undefined;
+    return next();
+  }
+  jwt.verify(token, process.env.JWT_SECRET_KEY, async function (err, decoded) {
+    if (!decoded) {
+      req.user = undefined;
+      return next();
+    }
+
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+      req.user = undefined;
+      return next();
+    }
+
+    // console.log(decoded.iat);
+    // console.log(new Date(user.passwordModifiedAt).getTime() / 1000);
+    // if (decoded.iat < new Date(user.passwordModifiedAt).getTime() / 1000) {
+    //   console.log("not valid");
+    //   return;
+    // }
+    req.user = user;
+    res.locals.user = user;
+    next();
+    // return user;
+  });
+  return;
 };

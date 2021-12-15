@@ -34,7 +34,7 @@ export default askForm?.addEventListener("submit", async (e) => {
 
     if (res.ok) {
       setTimeout(() => {
-        location.replace("/questions");
+        location.replace("/search");
       }, 2000);
     }
   } catch (err) {}

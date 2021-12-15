@@ -59,10 +59,12 @@ button {
 
 .nav__list {
   display: flex;
+  align-items: center;
 }
 
 .nav__item:not(:last-of-type) {
   margin-right: 2rem;
+  height: min-content;
 }
 
 .nav__link {
