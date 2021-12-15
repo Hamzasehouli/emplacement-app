@@ -5,7 +5,7 @@ const responseRoutes = require("./responseRoutes");
 
 const router = express.Router();
 router.route("/").get(userController.getAllUsers).post(userController.addUser);
-router.use("/:userId/questions", questionRoutes);
+router.use("/:userId/latitude/:lat/longitude/:lng/questions", questionRoutes);
 router.use("/:userId/questions/:questionId/responses", responseRoutes);
 
 module.exports = router;

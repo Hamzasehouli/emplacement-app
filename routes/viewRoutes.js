@@ -1,4 +1,5 @@
 const express = require("express");
+const authController = require("../controllers/authController");
 
 const router = express.Router();
 
@@ -11,10 +12,13 @@ router.get("/login", (req, res, next) => {
 router.get("/signup", (req, res, next) => {
   res.status(200).render("_signup", { title: "Sign up" });
 });
-router.get("/ask", (req, res, next) => {
-  res.status(200).render("_askquestion", { title: "Add a question" });
+router.get("/ask", authController.isLoggedIn, (req, res, next) => {
+  console.log(req.user);
+  res
+    .status(200)
+    .render("_askquestion", { title: "Add a question", userId: req.user.id });
 });
-router.get("/search", (req, res, next) => {
+router.get("/search", authController.isLoggedIn, (req, res, next) => {
   res.status(200).render("_questions", { title: "Search questions" });
 });
 

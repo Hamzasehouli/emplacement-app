@@ -1,7 +1,7 @@
 const Question = require("../models/questionModel");
 exports.postQuestion = async function (req, res, next) {
   try {
-    console.log(req.params);
+    console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
     const { title, content } = req.body;
     if (!title) {
       return console.log("pleas enter a title");
@@ -16,13 +16,21 @@ exports.postQuestion = async function (req, res, next) {
       );
     }
 
+    console.log(
+      title,
+      content,
+      req.params.userId,
+      req.params.lat,
+      req.params.lng
+    );
+
     const question = await Question.create({
       title,
       content,
-      user: req.user.id,
+      user: req.params.userId,
       location: {
         type: "Point",
-        coordinates: [-5.79975, 35.76727],
+        coordinates: [req.params.lng, req.params.lat],
       },
     });
 
