@@ -10,13 +10,14 @@ exports.signup = async function (req, res, next) {
       !email.trim().includes("@") ||
       !email.trim().split("@")[1].includes(".")
     ) {
+      next("err");
       return;
     }
     if (!password.trim() || password.trim().length < 8) {
+      next("err");
       return;
     }
 
-    console.log(res);
     const user = await User.create({
       email,
       password,

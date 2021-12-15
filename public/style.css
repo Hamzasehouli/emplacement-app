@@ -137,6 +137,13 @@ button {
   display: flex;
   width: 40%;
 }
+.form__error {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
 
 .hero {
   background-color: rgb(243, 237, 243);

@@ -6,13 +6,21 @@ export default loginForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
   try {
     console.log(email.value, password.value);
-    return;
-    const res = fetch("", {
+
+    const res = await fetch("http://localhost:3000/api/v1/auth/login", {
       method: "POST",
-      header: {
+      headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: email.value, password: password.value }),
     });
+
+    if (res.ok) {
+      setTimeout(() => {
+        location.replace("/");
+      }, 2000);
+    }
+
+    console.log(res);
   } catch (err) {}
 });
