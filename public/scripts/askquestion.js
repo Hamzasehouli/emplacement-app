@@ -38,10 +38,10 @@ export default askForm?.addEventListener("submit", async (e) => {
 
     const { latitude, longitude } = po.coords;
 
-    // console.log(latitude);
-    // console.log(longitude);
     if ((!isTitleCorrect && !isContentCorrect) || !latitude || !longitude)
       return;
+    console.log(latitude);
+    console.log(longitude);
 
     const res = await fetch(
       `http://localhost:3000/api/v1/users/${askForm.dataset.userid}/latitude/${latitude}/longitude/${longitude}/questions`,
@@ -56,9 +56,7 @@ export default askForm?.addEventListener("submit", async (e) => {
     console.log(res);
 
     if (res.ok) {
-      setTimeout(() => {
-        location.replace("/search");
-      }, 2000);
+      window.location.pathname = "/";
     }
   } catch (err) {}
 });

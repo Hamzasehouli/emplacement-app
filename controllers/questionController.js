@@ -15,13 +15,13 @@ exports.postQuestion = async function (req, res, next) {
       );
     }
 
-    console.log(
-      title,
-      content,
-      req.params.userId,
-      req.params.lat,
-      req.params.lng
-    );
+    // console.log(
+    //   title,
+    //   content,
+    //   req.params.userId,
+    //   req.params.lat,
+    //   req.params.lng
+    // );
 
     const question = await Question.create({
       title,
@@ -29,9 +29,10 @@ exports.postQuestion = async function (req, res, next) {
       user: req.params.userId,
       location: {
         type: "Point",
-        coordinates: [req.params.lng, req.params.lat],
+        coordinates: [req.params.lng * 1, req.params.lat * 1],
       },
     });
+    console.log(question);
 
     res.status(201).json({
       status: "success",

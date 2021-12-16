@@ -32,7 +32,8 @@ router.get("/ask", (req, res, next) => {
     .status(200)
     .render("_askquestion", { title: "Add a question", userId: req.user.id });
 });
-router.get("/search", async (req, res, next) => {
+
+router.get("/search/lng/:lng/lat/:lat", async (req, res, next) => {
   if (!req.user) {
     res.status(200).render("_login");
     return;
@@ -42,17 +43,26 @@ router.get("/search", async (req, res, next) => {
       $geoNear: {
         near: {
           type: "Point",
-          coordinates: [-5.825412956034679, 35.746303550878864],
+          coordinates: [req.params.lng * 1, req.params.lat * 1],
         },
         distanceField: "dist.calculated",
-        maxDistance: 0.0015678503,
+        // maxDistance: 0.0015678503,
         // includeLocs: "dist.location",
         // spherical: true,
       },
     },
+    {
+      $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
   ]);
-  console.log(questions);
-  res.status(200).render("_questions", { title: "Search questions" });
+  console.log(questions[0]);
+
+  res.status(200).render("_questions", { title: "Questions", questions });
 });
 
 module.exports = router;

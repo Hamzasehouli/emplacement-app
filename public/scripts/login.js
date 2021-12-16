@@ -38,9 +38,7 @@ export default loginForm?.addEventListener("submit", async (e) => {
     });
 
     if (res.ok) {
-      setTimeout(() => {
-        location.replace("/");
-      }, 2000);
+      location.replace("/");
     } else {
       loginBtn.innerText = "Login";
     }

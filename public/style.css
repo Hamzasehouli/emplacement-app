@@ -179,6 +179,7 @@ button {
 .questions__info {
   display: flex;
   margin-bottom: 3rem;
+  align-items: center;
 }
 
 .questions__info > *:not(:last-child) {

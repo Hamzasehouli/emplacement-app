@@ -1,8 +1,9 @@
 const responseForm = document.querySelector(".form-response");
 const responseContent = document.querySelector(".response-area");
 const responseShow = document.querySelector(".show-response");
+const sendResponse = document.querySelector(".send-response");
 
-export const toggleResponse = responseShow.addEventListener("click", (e) => {
+export const toggleResponse = responseShow?.addEventListener("click", () => {
   responseForm.classList.toggle("hidden");
   if (responseForm.classList.contains("hidden")) {
     responseShow.innerText = "Answer this question";
@@ -13,9 +14,7 @@ export const toggleResponse = responseShow.addEventListener("click", (e) => {
 
 export const responding = responseForm?.addEventListener(
   "submit",
-  async (e) => {
-    console;
-    log("rr");
+  async function (e) {
     e.preventDefault();
     try {
       const { questionId, userId } = responseForm.dataset;
@@ -35,5 +34,28 @@ export const responding = responseForm?.addEventListener(
       const data = await res.json();
       console.log(res, data);
     } catch (err) {}
+  }
+);
+
+export const sendRes = sendResponse?.addEventListener(
+  "click",
+  async function () {
+    console.log(responseForm.dataset);
+
+    const res = await fetch(
+      `http://localhost:3000/api/v1/users/${responseForm.dataset.userid}/questions/${responseForm.dataset.questionid}/responses`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ content: responseContent.value }),
+      }
+    );
+
+    console.log(res);
+    if (res.ok) {
+      window.location.reload();
+    }
   }
 );
