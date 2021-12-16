@@ -14,7 +14,7 @@ block content
                     p.questions__title #{question.title}
                     article.questions__content #{question.content}
                     button(style="margin-right:1.5rem" type="button").btn-flat.questions__response.show-response Answer the question
-                    button(style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
+                    button(data-userid=question.user[0]._id data-questionId=question._id style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
                     button.questions__expand ➕ expand content
                     //- form.form-response.hidden()
                     form.form-response.hidden(data-questionId=question._id data-userId=`${question.user[0]._id}` )

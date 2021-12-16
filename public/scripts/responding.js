@@ -2,6 +2,7 @@ const responseForm = document.querySelector(".form-response");
 const responseContent = document.querySelector(".response-area");
 const responseShow = document.querySelector(".show-response");
 const sendResponse = document.querySelector(".send-response");
+const likeBtn = document.querySelector(".questions__like");
 
 export const toggleResponse = responseShow?.addEventListener("click", () => {
   responseForm.classList.toggle("hidden");
@@ -59,3 +60,7 @@ export const sendRes = sendResponse?.addEventListener(
     }
   }
 );
+
+likeBtn?.addEventListener("click", function () {
+  console.log(this.dataset);
+});
