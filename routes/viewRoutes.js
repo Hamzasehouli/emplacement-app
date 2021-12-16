@@ -46,7 +46,7 @@ router.get("/search/lng/:lng/lat/:lat", async (req, res, next) => {
           coordinates: [req.params.lng * 1, req.params.lat * 1],
         },
         distanceField: "dist.calculated",
-        // maxDistance: 0.0015678503,
+        maxDistance: 30000,
         // includeLocs: "dist.location",
         // spherical: true,
       },
@@ -60,7 +60,7 @@ router.get("/search/lng/:lng/lat/:lat", async (req, res, next) => {
       },
     },
   ]);
-  console.log(questions[0]);
+  console.log(questions);
 
   res.status(200).render("_questions", { title: "Questions", questions });
 });

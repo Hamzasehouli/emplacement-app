@@ -2,21 +2,24 @@ extends base
 
 block content
     section.section-questions
-        ul.questions__list
-            //- a(style="text-decoration:none;color:inherit" href="#")  
-            for question in questions
-                li(data-id= `${question.id}`).questions__item 
-                    .questions__info 
-                        p(style="color: black;").questions__owner #{question.user[0].email}
-                        p(style="font-style: italic;").questions__date #{new Intl.DateTimeFormat('en-US', {weekday:'short',month:'short',hour:'numeric',minute:'numeric'}).format(question.created)}
-                        p(style="margin-right:auto").questions__distance #{Math.floor(question.dist.calculated)} km
-                        button(type="button" style="font-size:2rem;color:var(--color-primary)") ❤
-                    p.questions__title #{question.title}
-                    article.questions__content #{question.content}
-                    button(style="margin-right:1.5rem" type="button").btn-flat.questions__response.show-response Answer the question
-                    button(data-userid=question.user[0]._id data-questionId=question._id style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
-                    button.questions__expand ➕ expand content
-                    //- form.form-response.hidden()
-                    form.form-response.hidden(data-questionId=question._id data-userId=`${question.user[0]._id}` )
-                        textarea.response-area
-                        button(type="submit").btn-flat.send-response Send
+        if(questions && questions.length !== 0)
+            ul.questions__list
+                //- a(style="text-decoration:none;color:inherit" href="#")  
+                for question in questions
+                    li().questions__item 
+                        .questions__info 
+                            p(style="color: black;").questions__owner #{question.user[0].email}
+                            p(style="font-style: italic;").questions__date #{new Intl.DateTimeFormat('en-US', {weekday:'short',month:'short',hour:'numeric',minute:'numeric'}).format(question.created)}
+                            p(style="margin-right:auto").questions__distance #{Math.ceil(question.dist.calculated /1000)} km
+                            button(type="button" style="font-size:2rem;color:var(--color-primary)") ❤
+                        p.questions__title #{question.title}
+                        article.questions__content #{question.content}
+                        button(style="margin-right:1.5rem" type="button" data-id=question._id).btn-flat.questions__response.show-response Answer the question
+                        button(data-userid=question.user[0]._id data-questionId=question._id style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
+                        button.questions__expand ➕ expand content
+                        //- form.form-response.hidden()
+                        form.form-response.hidden(data-questionId=question._id data-userId=`${question.user[0]._id}` )
+                            textarea.response-area
+                            button(type="submit").btn-flat.send-response Send
+        else 
+            p There are no quetions near you yet                 

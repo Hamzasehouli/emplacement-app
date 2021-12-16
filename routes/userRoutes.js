@@ -2,6 +2,7 @@ const express = require("express");
 const userController = require("../controllers/userController");
 const questionRoutes = require("./questionRoutes");
 const responseRoutes = require("./responseRoutes");
+const favoriteRoutes = require("./favoriteRoutes");
 
 const router = express.Router();
 router.route("/").get(userController.getAllUsers).post(userController.addUser);
