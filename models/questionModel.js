@@ -31,6 +31,8 @@ const questionSchema = new mongoose.Schema({
   },
 });
 
+questionSchema.index({ location: "2dsphere" });
+
 const Question = mongoose.model("Question", questionSchema);
 
 module.exports = Question;
