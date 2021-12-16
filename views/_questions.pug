@@ -13,17 +13,10 @@ block content
                     button(type="button" style="font-size:2rem;color:var(--color-primary)") ❤
                 p.questions__title Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 article.questions__content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi.Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi.Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi.Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi.Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi. Quae qui eveniet aliquam dolorum neque expedita repellat beatae, unde facere animi dolorem.
-                button(style="margin-right:1.5rem").btn-flat.questions__response Answer the question
-                button(style="margin-right:1.5rem").questions__response 👍🏻 add to favourits
-                button.questions__response ➕ expand content
-            li.questions__item 
-                .questions__info 
-                    p(style="color: black;").questions__owner Hamza Sehouli
-                    p(style="font-style: italic;").questions__date yesterday
-                    p(style="margin-right:auto").questions__distance 0.4 km
-                    button(type="button" style="font-size:2rem;color:var(--color-primary)") ❤
-                p.questions__title Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                article.questions__content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi.Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi.Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi.Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi.Sit reprehenderit perferendis debitis aperiam voluptatem dolor doloremque modi. Quae qui eveniet aliquam dolorum neque expedita repellat beatae, unde facere animi dolorem.
-                button(style="margin-right:1.5rem").btn-flat.questions__response Answer the question
-                button(style="margin-right:1.5rem").questions__response 👍🏻 add to favourits
-                button.questions__response ➕ expand content
+                button(style="margin-right:1.5rem" type="button").btn-flat.questions__response.show-response Answer the question
+                button(style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
+                button.questions__expand ➕ expand content
+                //- form.form-response.hidden(data-questionId=#{questionId} data-userId=#{userId})
+                form.form-response.hidden()
+                    textarea.response-area
+                    button(type="submit").btn-flat Send

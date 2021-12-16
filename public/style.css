@@ -195,3 +195,18 @@ button {
   line-height: 150%;
   overflow: hidden;
 }
+
+.response-area {
+  width: 100%;
+  margin-top: 2rem;
+  outline: none;
+  border: none;
+  border: 2px solid rgba(212, 211, 211, 0.438);
+  padding: 0.5rem;
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  height: 20rem;
+  margin-bottom: 1rem;
+}
