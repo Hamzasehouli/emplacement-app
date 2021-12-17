@@ -1,11 +1,60 @@
 const express = require("express");
 const authController = require("../controllers/authController");
 const Question = require("../models/questionModel");
+const Favorite = require("../models/favoriteModel");
 
 const router = express.Router();
 
 router.use(authController.getUser);
 
+router.get("/favorites", async (req, res, next) => {
+  if (!req.user) {
+    res.status(200).render("_login");
+    return;
+  }
+  const favorites = await Favorite.aggregate([
+    // {
+    //   $geoNear: {
+    //     near: {
+    //       type: "Point",
+    //       coordinates: [req.params.lng * 1, req.params.lat * 1],
+    //     },
+    //     distanceField: "dist.calculated",
+    //     maxDistance: 30000,
+    //     // includeLocs: "dist.location",
+    //     // spherical: true,
+    //   },
+    // },
+    {
+      $match: { user: req.user._id },
+    },
+    {
+      $lookup: {
+        from: "questions",
+        localField: "question",
+        foreignField: "_id",
+        as: "question",
+      },
+    },
+    {
+      $unwind: "$question",
+    },
+    {
+      $project: { question: 1 },
+    },
+  ]);
+
+  // const favorites = await Favorite.find({ user: req.user._id }).populate(
+  //   "question"
+  // );
+
+  // const results = favorites.aggregate([{}]);
+  console.log(favorites);
+  res.status(200).render("_favorites", {
+    title: "Favorite questions",
+    favorites,
+  });
+});
 router.get("/", (req, res, next) => {
   res.status(200).render("_overview", { title: "Home" });
 });

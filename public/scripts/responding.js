@@ -2,7 +2,7 @@ const responseForm = document.querySelectorAll(".form-response");
 const responseContent = document.querySelector(".response-area");
 const responseShow = document.querySelectorAll(".show-response");
 const sendResponse = document.querySelector(".send-response");
-const likeBtn = document.querySelector(".questions__like");
+const likeBtn = document.querySelectorAll(".questions__like");
 
 export const toggleResponse = responseShow?.forEach((t) => {
   t?.addEventListener("click", (e) => {
@@ -66,6 +66,19 @@ export const sendRes = sendResponse?.addEventListener(
   }
 );
 
-likeBtn?.addEventListener("click", function () {
-  console.log(this.dataset);
+likeBtn?.forEach((t) => {
+  t?.addEventListener("click", async function () {
+    console.log(this.dataset);
+    const res = await fetch(
+      `http://localhost:3000/api/v1/users/${this.dataset.userid}/questions/${this.dataset.questionid}/favorites`,
+      {
+        method: "POST",
+        // headers: {
+        //   "content-type": "application/json",
+        // },
+        // body: JSON.stringify({ content: responseContent.value }),
+      }
+    );
+    console.log(res);
+  });
 });
