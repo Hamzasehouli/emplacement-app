@@ -40,8 +40,8 @@ export default askForm?.addEventListener("submit", async (e) => {
 
     if ((!isTitleCorrect && !isContentCorrect) || !latitude || !longitude)
       return;
-    console.log(latitude);
-    console.log(longitude);
+    console.log(askForm.dataset.userid);
+    // console.log(longitude);
 
     const res = await fetch(
       `http://localhost:3000/api/v1/users/${askForm.dataset.userid}/latitude/${latitude}/longitude/${longitude}/questions`,

@@ -2,6 +2,7 @@ const Question = require("../models/questionModel");
 exports.postQuestion = async function (req, res, next) {
   try {
     const { title, content } = req.body;
+    console.log(title, content);
     if (!title) {
       return next("pleas enter a title");
     }
@@ -10,6 +11,7 @@ exports.postQuestion = async function (req, res, next) {
     }
 
     if (req.params.userId !== req.user.id) {
+      console.log("dddd");
       return next(
         "you are not allowed to post a question, please make sure that your logged in "
       );

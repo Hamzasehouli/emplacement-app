@@ -2,7 +2,7 @@ extends base
 
 block content
     section.section-ask 
-        form(data-userId= userId).form.ask-form
+        form(data-userId=user.id).form.ask-form
             h2 Add a question 
             div.form__control
                 input.form__input#title(placeholder="Title" type="text")

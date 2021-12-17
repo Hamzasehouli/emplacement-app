@@ -85,7 +85,6 @@ exports.login = async function (req, res, next) {
 exports.isLoggedIn = async function (req, res, next) {
   try {
     const token = req.cookies?.jwt;
-    console.log(token);
     if (!jwt) {
       return next("your are not logged in");
     }
