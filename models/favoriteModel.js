@@ -4,6 +4,7 @@ const favoriteSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.ObjectId,
+      ref: "User",
     },
     question: {
       type: mongoose.Schema.ObjectId,
@@ -11,8 +12,9 @@ const favoriteSchema = new mongoose.Schema(
     },
     addedAt: {
       type: Date,
-      default: new Date(),
+      default: Date.now(),
     },
+    dist: { type: Number },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );

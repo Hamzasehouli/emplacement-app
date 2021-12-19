@@ -69,14 +69,16 @@ export const sendRes = sendResponse?.addEventListener(
 likeBtn?.forEach((t) => {
   t?.addEventListener("click", async function () {
     console.log(this.dataset);
+    if (this.dataset.user === this.dataset.userid)
+      return console.log("you can not like your question");
     const res = await fetch(
       `http://localhost:3000/api/v1/users/${this.dataset.userid}/questions/${this.dataset.questionid}/favorites`,
       {
         method: "POST",
-        // headers: {
-        //   "content-type": "application/json",
-        // },
-        // body: JSON.stringify({ content: responseContent.value }),
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ dist: this.dataset.dist }),
       }
     );
     console.log(res);

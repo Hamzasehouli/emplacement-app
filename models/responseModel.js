@@ -9,7 +9,7 @@ const responseSchema = new mongoose.Schema({
   },
   addedAt: {
     type: Date,
-    default: new Date(),
+    default: Date.now(),
   },
   content: { type: String, required: [true, "Response content is empty"] },
 });

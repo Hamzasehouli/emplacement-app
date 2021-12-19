@@ -4,6 +4,7 @@ exports.addFavorite = async function (req, res, next) {
     const favorite = await Favorite.create({
       question: req.params.questionId,
       user: req.params.userId,
+      dist: req.body.dist,
     });
     res.status(201).json({
       status: "success",

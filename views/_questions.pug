@@ -11,11 +11,14 @@ block content
                             p(style="color: black;").questions__owner #{question.user[0].email}
                             p(style="font-style: italic;").questions__date #{new Intl.DateTimeFormat('en-US', {weekday:'short',month:'short',hour:'numeric',minute:'numeric'}).format(question.created)}
                             p(style="margin-right:auto").questions__distance #{Math.ceil(question.dist.calculated /1000)} km
-                            button(type="button" style="font-size:2rem;color:var(--color-primary)") ❤
+                            //- button(type="button" style="font-size:2rem;color:var(--color-primary)") ❤
                         p.questions__title #{question.title}
                         article.questions__content #{question.content}
                         button(style="margin-right:1.5rem" type="button" data-id=question._id).btn-flat.questions__response.show-response Answer the question
-                        button(data-userid=question.user[0]._id data-questionId=question._id style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
+                        if question.user[0]._id != user.id
+                            
+                            button(data-dist=question.dist.calculated data-user=question.user[0]._id data-userid=user.id data-questionId=question._id style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
+                        
                         //- button.questions__expand ➕ expand content
                         //- form.form-response.hidden()
                         form.form-response.hidden(data-questionId=question._id data-userId=`${question.user[0]._id}` )
