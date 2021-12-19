@@ -82,11 +82,12 @@ router.get("/ask", (req, res, next) => {
     .render("_askquestion", { title: "Add a question", userId: req.user.id });
 });
 
-router.get("/search/lng/:lng/lat/:lat", async (req, res, next) => {
+router.get("/search/lng/:lng/lat/:lat/page/:page", async (req, res, next) => {
   if (!req.user) {
     res.status(200).render("_login");
     return;
   }
+
   const questions = await Question.aggregate([
     {
       $geoNear: {
@@ -109,9 +110,25 @@ router.get("/search/lng/:lng/lat/:lat", async (req, res, next) => {
       },
     },
   ]);
-  console.log(questions);
+  console.log(req.params);
+  let page = req.params.page ?? 1;
+  const limit = 10;
+  const numberOfDocs = questions.length;
+  const numberOfPages = Math.ceil(numberOfDocs / limit);
+  const skip = limit * (page * 1 - 1);
+  console.log(page, "page");
+  console.log(skip, "skip");
+  console.log(numberOfPages, "numberOfPages");
+  console.log(numberOfDocs, "numberOfDocs");
+  const rawQuestions = questions.slice(skip, skip + limit);
+  console.log(rawQuestions);
 
-  res.status(200).render("_questions", { title: "Questions", questions });
+  res.status(200).render("_questions", {
+    title: "Questions",
+    questions: rawQuestions,
+    page,
+    numberOfPages,
+  });
 });
 
 module.exports = router;

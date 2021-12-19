@@ -24,5 +24,11 @@ block content
                         form.form-response.hidden(data-questionId=question._id data-userId=`${question.user[0]._id}` )
                             textarea.response-area(data-questionId=question._id)
                             button(type="submit" data-questionId=question._id data-userId=user.id).btn-flat.send-response Send
+            .pagination__container 
+                if page>1
+                    button.left(type="button") prev
+                span.pagination__page(data-page=page)= page
+                if page<numberOfPages
+                    button.right(type="button") next
         else 
             p There are no quetions near you yet                 

@@ -94,9 +94,26 @@ button {
 .section-questions {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 7rem;
+}
+
+.pagination__container > * {
+  display: block;
+}
+
+.pagination__container {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination__page {
+  margin-right: 2rem;
+  margin-left: 2rem;
 }
 
 .form {
