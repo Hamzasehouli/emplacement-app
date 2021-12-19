@@ -1,9 +1,12 @@
 nav.nav 
     a.logo(href="/")
         img.logo-img(style="width:90px;height:30px;object-fit:cover" src="/logo.png", alt="sehouli-emplacement-logo")
-    //- form.form-search
-    //-     input(type="text" placeholder="search ")
-    //-     button.btn-flat(type="submit") Ask    
+    form.form-search
+        input.searchInput(type="text" placeholder="search" data-userid=user && user.id)
+        ul.search__list        
+        //-    
+           
+        //- button.btn-flat(type="submit") Ask    
     ul.nav__list
         if(!user)
             li.nav__item 

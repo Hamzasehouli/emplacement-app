@@ -31,6 +31,8 @@ const questionSchema = new mongoose.Schema({
 
 questionSchema.index({ location: "2dsphere" });
 
+questionSchema.index({ content: "text" });
+
 questionSchema.pre("find", function (next) {
   this.populate("user");
   next();

@@ -2,6 +2,7 @@ import signup from "./signup.js";
 import login from "./login.js";
 import askquestion from "./askquestion.js";
 import logout from "./logout.js";
+import searchQuestion from "./searchQuestion.js";
 import { responding, toggleResponse, sendRes } from "./responding.js";
 
 const test = document.querySelector(".test");

@@ -44,3 +44,22 @@ exports.postQuestion = async function (req, res, next) {
     });
   } catch (err) {}
 };
+
+exports.getQuestions = async function (req, res, next) {
+  console.log(req.query);
+  const questions = await Question.find({
+    $text: {
+      $search: req.query.term,
+      $caseSensitive: false,
+      $diacriticSensitive: false,
+    },
+  });
+
+  console.log(questions);
+  res.status(200).json({
+    status: "success",
+    data: {
+      questions,
+    },
+  });
+};
