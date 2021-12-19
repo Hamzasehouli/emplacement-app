@@ -1,7 +1,7 @@
 const responseForm = document.querySelectorAll(".form-response");
-const responseContent = document.querySelector(".response-area");
+const responseContent = document.querySelectorAll(".response-area");
 const responseShow = document.querySelectorAll(".show-response");
-const sendResponse = document.querySelector(".send-response");
+const sendResponse = document.querySelectorAll(".send-response");
 const likeBtn = document.querySelectorAll(".questions__like");
 
 export const toggleResponse = responseShow?.forEach((t) => {
@@ -10,7 +10,7 @@ export const toggleResponse = responseShow?.forEach((t) => {
     responseForm?.forEach((k) => {
       if (k.dataset.questionid !== e.target.dataset.id) return;
       k.classList.toggle("hidden");
-      if (t.classList.contains("hidden")) {
+      if (k.classList.contains("hidden")) {
         t.innerText = "Answer this question";
       } else {
         t.innerText = "Collapse the reponse area";
@@ -43,28 +43,31 @@ export const responding = responseForm?.forEach((t) => {
   });
 });
 
-export const sendRes = sendResponse?.addEventListener(
-  "click",
-  async function () {
-    console.log(responseForm.dataset);
+export const sendRes = sendResponse?.forEach(function (r) {
+  r?.addEventListener("click", async function () {
+    console.log(responseContent);
+
+    const responseCon = Array.from(responseContent).find(function (z) {
+      return z.dataset.questionid === r.dataset.questionid;
+    });
 
     const res = await fetch(
-      `http://localhost:3000/api/v1/users/${responseForm.dataset.userid}/questions/${responseForm.dataset.questionid}/responses`,
+      `http://localhost:3000/api/v1/users/${r.dataset.userid}/questions/${r.dataset.questionid}/responses`,
       {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ content: responseContent.value }),
+        body: JSON.stringify({ content: responseCon.value }),
       }
     );
 
-    console.log(res);
+    responseCon.value = "";
     if (res.ok) {
       window.location.reload();
     }
-  }
-);
+  });
+});
 
 likeBtn?.forEach((t) => {
   t?.addEventListener("click", async function () {

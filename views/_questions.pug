@@ -22,7 +22,7 @@ block content
                         //- button.questions__expand ➕ expand content
                         //- form.form-response.hidden()
                         form.form-response.hidden(data-questionId=question._id data-userId=`${question.user[0]._id}` )
-                            textarea.response-area
-                            button(type="submit").btn-flat.send-response Send
+                            textarea.response-area(data-questionId=question._id)
+                            button(type="submit" data-questionId=question._id data-userId=user.id).btn-flat.send-response Send
         else 
             p There are no quetions near you yet                 
