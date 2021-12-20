@@ -43,61 +43,53 @@ export const responding = responseForm?.forEach((t) => {
   });
 });
 
-export const sendRes = sendResponse?.forEach((t) => {
-  t?.addEventListener("click", async function () {
-    responseForm?.forEach(async (e) => {
-      if (t.dataset.user === t.dataset.userid) {
-        e.querySelector(".response-area").value =
-          "Is not allowed to response your own question";
-        return;
-      }
-      if (e.dataset.questionid !== t.dataset.questionid) return;
-      console.log(e.querySelector(".response-area").value);
-      console.log(t.dataset);
+export const sendRes = sendResponse?.forEach(function (r) {
+  r?.addEventListener("click", async function () {
+    console.log(responseContent);
 
-      const res = await fetch(
-        `http://localhost:3000/api/v1/users/${e.dataset.userid}/questions/${e.dataset.questionid}/responses`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            content: e.querySelector(".response-area").value,
-            location: {
-              type: e.dataset.type,
-              coordinates: [e.dataset.lng * 1, e.dataset.lat * 1],
-            },
-          }),
-        }
-      );
-      e.querySelector(".response-area").value = "";
-      // console.log(res);
-      // if (res.ok) {
-      //   window.location.reload();
-      // }
-    });
+    const responseCon = Array.from(responseContent).find(function (z) {
+      return z.dataset.questionid === r.dataset.questionid;
+   
+        });
+
   });
-});
 
 likeBtn?.forEach((t) => {
   t.addEventListener("click", async function () {
     console.log(t.dataset);
     const res = await fetch(
-      `http://localhost:3000/api/v1/users/${t.dataset.userid}/questions/${t.dataset.questionid}/favorites`,
+      `http://localhost:3000/api/v1/users/${r.dataset.userid}/questions/${r.dataset.questionid}/responses`,
       {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({
-          dist: t.dataset.dist * 1,
-        }),
+        body: JSON.stringify({ content: responseCon.value }),
       }
     );
-    // console.log(res);
+
+    responseCon.value = "";
     if (res.ok) {
       window.location.reload();
     }
+  });
+});
+
+likeBtn?.forEach((t) => {
+  t?.addEventListener("click", async function () {
+    console.log(this.dataset);
+    if (this.dataset.user === this.dataset.userid)
+      return console.log("you can not like your question");
+    const res = await fetch(
+      `http://localhost:3000/api/v1/users/${this.dataset.userid}/questions/${this.dataset.questionid}/favorites`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ dist: this.dataset.dist }),
+      }
+    );
+    console.log(res);
   });
 });

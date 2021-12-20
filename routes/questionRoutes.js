@@ -4,7 +4,11 @@ const authController = require("../controllers/authController");
 
 const router = express.Router({ mergeParams: true });
 router.use(authController.isLoggedIn);
-router.route("/").post(questionController.postQuestion);
+router
+  .route("/")
+  .post(questionController.postQuestion)
+  .get(questionController.getQuestions);
+
 //   .get(questionController.getAllQuestions)
 
 module.exports = router;

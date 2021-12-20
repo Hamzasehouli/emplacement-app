@@ -20,11 +20,9 @@ const questionSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.ObjectId,
-    unique: true,
+    ref: "User",
   },
-  responses: {
-    type: [mongoose.Schema.ObjectId],
-  },
+
   created: {
     type: Date,
     default: Date.now(),
@@ -32,6 +30,13 @@ const questionSchema = new mongoose.Schema({
 });
 
 questionSchema.index({ location: "2dsphere" });
+
+questionSchema.index({ content: "text" });
+
+questionSchema.pre("find", function (next) {
+  this.populate("user");
+  next();
+});
 
 const Question = mongoose.model("Question", questionSchema);
 
