@@ -53,10 +53,10 @@ app.use(cookieParser());
 
 // app.use(keycloak.middleware());
 
-app.use((req, res, next) => {
-  console.log(new Date());
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(new Date());
+//   next();
+// });
 
 app.use(express.static("public"));
 

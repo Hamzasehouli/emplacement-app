@@ -76,6 +76,7 @@ button {
 .nav__list {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .nav__item:not(:last-of-type) {
@@ -229,7 +230,7 @@ button {
 
 .hero {
   background-color: rgb(243, 237, 243);
-  height: 50vh;
+  height: 70vh;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -246,6 +247,10 @@ button {
 @media only screen and (max-width: 55rem) {
   .hero h1 {
     font-size: 3.5rem;
+  }
+
+  .hero {
+    height: 30rem;
   }
 }
 @media only screen and (max-width: 37.5rem) {
@@ -274,7 +279,7 @@ button {
 }
 
 .questions__list {
-  width: 60%;
+  min-width: 60%;
 }
 @media only screen and (max-width: 20rem) {
   .header-btns {
@@ -282,6 +287,11 @@ button {
   }
   .test {
     margin-bottom: 1rem;
+  }
+}
+@media only screen and (max-width: 33rem) {
+  .questions__list {
+    font-size: 1.2rem;
   }
 }
 
@@ -331,4 +341,11 @@ button {
 }
 .copyright {
   text-align: center;
+}
+
+@media only screen and (max-width: 30rem) {
+  .nav-email {
+    display: inline-block;
+    margin-top: 3rem;
+  }
 }
