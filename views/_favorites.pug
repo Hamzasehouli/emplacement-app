@@ -2,29 +2,6 @@ extends base
 
 block content
     section.section-questions
-<<<<<<< HEAD
-        if(questions && questions.length !== 0)
-            ul.questions__list
-                //- a(style="text-decoration:none;color:inherit" href="#")  
-                for question in questions
-                    li().questions__item 
-                        .questions__info 
-                            p(style="color: black;").questions__owner #{question.user.email}
-                            p(style="font-style: italic;").questions__date #{new Intl.DateTimeFormat('en-US', {weekday:'short',month:'short',hour:'numeric',minute:'numeric'}).format(question.addedAt)}
-                            p(style="margin-right:auto").questions__distance #{Math.round(question.dist /1000)} km
-                            //- button(type="button" style="font-size:2rem;color:var(--color-primary)") ❤
-                        p.questions__title #{question.question.title}
-                        article.questions__content #{question.question.content}
-                        button(style="margin-right:1.5rem" type="button" data-id=question.question._id).btn-flat.questions__response.show-response Answer the question
-                        //- button.questions__expand ➕ expand content
-                        //- form.form-response.hidden()
-                        form.form-response.hidden( data-questionId=question.question._id data-userId=user._id )
-                            textarea.response-area
-                            button(type="submit").btn-flat.send-response Send
-        else 
-            p There are no quetions near you yet                 
-                        //- button(data-type=question.location.type data-lng=question.location.coordinates[0] data-lat=question.location.coordinates[1] data-userid=question.user[0]._id data-questionId=question._id style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
-=======
         if(favorites && favorites.length !== 0)
             ul.questions__list
                 //- a(style="text-decoration:none;color:inherit" href="#")  
@@ -46,4 +23,3 @@ block content
                             button(type="submit").btn-flat.send-response Send
         else 
             p You have got no favorite questions yet, start liking to add them to your favorite questions list                
->>>>>>> b5d18e3362e469119b78efa3f1053c0dd45daf37

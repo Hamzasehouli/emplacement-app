@@ -1,32 +1,41 @@
 const mongoose = require("mongoose");
 
-const questionSchema = new mongoose.Schema({
-  title: {
-    type: String,
-  },
-  content: {
-    type: String,
-  },
-  location: {
-    type: {
-      type: String, // Don't do `{ location: { type: String } }`
-      enum: ["Point"], // 'location.type' must be 'Point'
-      required: true,
+const questionSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
     },
-    coordinates: {
-      type: [Number],
-      required: true,
+    content: {
+      type: String,
     },
-  },
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-  },
+    location: {
+      type: {
+        type: String, // Don't do `{ location: { type: String } }`
+        enum: ["Point"], // 'location.type' must be 'Point'
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
 
-  created: {
-    type: Date,
-    default: Date.now(),
+    created: {
+      type: Date,
+      default: Date.now(),
+    },
   },
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
+
+questionSchema.virtual("responses", {
+  ref: "Response",
+  localField: "_id",
+  foreignField: "question",
 });
 
 questionSchema.index({ location: "2dsphere" });

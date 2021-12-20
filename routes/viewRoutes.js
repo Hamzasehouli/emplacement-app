@@ -145,4 +145,23 @@ router.get("/favorites", async function (req, res, next) {
     .render("_favorites", { title: "Favorites", questions: favorites });
 });
 
+router.get("/questions/:questionid", async function (req, res, next) {
+  // console.log(req.params.questionid);
+  // if (!req.user) {
+  //   res.status(200).render("_login");
+  //   return;
+  // }
+
+  // if (!req.params.questionid) {
+  //   res.status(200).render("_errorPage");
+  //   return;
+  // }
+
+  const question = await Question.findById(req.params.questionid)
+    .populate("responses")
+    .populate("user");
+  console.log(question);
+  res.status(200).render("_question", { question });
+});
+
 module.exports = router;

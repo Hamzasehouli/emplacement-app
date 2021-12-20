@@ -49,14 +49,8 @@ export const sendRes = sendResponse?.forEach(function (r) {
 
     const responseCon = Array.from(responseContent).find(function (z) {
       return z.dataset.questionid === r.dataset.questionid;
-   
-        });
+    });
 
-  });
-
-likeBtn?.forEach((t) => {
-  t.addEventListener("click", async function () {
-    console.log(t.dataset);
     const res = await fetch(
       `http://localhost:3000/api/v1/users/${r.dataset.userid}/questions/${r.dataset.questionid}/responses`,
       {

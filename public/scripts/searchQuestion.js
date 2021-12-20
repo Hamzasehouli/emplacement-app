@@ -23,7 +23,7 @@ export default searchInput?.addEventListener("input", async function (e) {
   const markup = `${data.data.questions
     ?.map((question) => {
       return `<li class="search__item">
-        <a class="search__anch" href="#">
+        <a class="search__anch" href=/questions/${question._id}>
         <p  class="search__title">${question.title}</p>
         <p  class="search__content">${question.content}</p>
         </a>

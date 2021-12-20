@@ -10,28 +10,16 @@ block content
                         .questions__info 
                             p(style="color: black;").questions__owner #{question.user[0].email}
                             p(style="font-style: italic;").questions__date #{new Intl.DateTimeFormat('en-US', {weekday:'short',month:'short',hour:'numeric',minute:'numeric'}).format(question.created)}
-<<<<<<< HEAD
-                            p(style="margin-right:auto").questions__distance #{Math.round(question.dist.calculated /1000)} km
-=======
                             p(style="margin-right:auto").questions__distance #{Math.ceil(question.dist.calculated /1000)} km
->>>>>>> b5d18e3362e469119b78efa3f1053c0dd45daf37
                             //- button(type="button" style="font-size:2rem;color:var(--color-primary)") ❤
                         p.questions__title #{question.title}
                         article.questions__content #{question.content}
                         button(style="margin-right:1.5rem" type="button" data-id=question._id).btn-flat.questions__response.show-response Answer the question
-<<<<<<< HEAD
-                        button( data-dist=question.dist.calculated data-userid=user.id data-questionId=question._id style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
-                        //- button.questions__expand ➕ expand content
-                        //- form.form-response.hidden()
-                        form.form-response.hidden(data-type=question.location.type data-lng=question.location.coordinates[0] data-lat=question.location.coordinates[1] data-questionId=question._id data-user=question.user[0]._id  data-userId=user._id )
-                            textarea.response-area
-                            button(type="submit" data-questionId=question._id data-user=question.user[0]._id  data-userId=user._id).btn-flat.send-response Send
-=======
                         if question.user[0]._id != user.id
                             
                             button(data-dist=question.dist.calculated data-user=question.user[0]._id data-userid=user.id data-questionId=question._id style="margin-right:1.5rem").questions__like 👍🏻 add to favourits
                         
-                        //- button.questions__expand ➕ expand content
+                        a(href=`/questions/${question._id}`).questions__expand Show question
                         //- form.form-response.hidden()
                         form.form-response.hidden(data-questionId=question._id data-userId=`${question.user[0]._id}` )
                             textarea.response-area(data-questionId=question._id)
@@ -42,6 +30,5 @@ block content
                 span.pagination__page(data-page=page)= page
                 if page<numberOfPages
                     button.right(type="button") next
->>>>>>> b5d18e3362e469119b78efa3f1053c0dd45daf37
         else 
             p There are no quetions near you yet                 
