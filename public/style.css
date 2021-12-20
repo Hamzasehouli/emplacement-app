@@ -56,6 +56,22 @@ button {
   justify-content: space-between;
   align-items: center;
 }
+@media only screen and (max-width: 28.125rem) {
+  .nav {
+    display: grid;
+    grid-template-rows: repeat(3, 3rem);
+    justify-content: center;
+    justify-items: center;
+  }
+
+  .nav__item > * {
+    margin-bottom: 3rem;
+  }
+  .form-search {
+    grid-row: 3/4;
+    width: 100% !important;
+  }
+}
 
 .nav__list {
   display: flex;
@@ -92,13 +108,17 @@ button {
 .section-signup,
 .section-ask,
 .section-questions {
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 7rem;
 }
+
+/* @media only screen and (max-width:) {
+  
+} */
 
 .pagination__container > * {
   display: block;
@@ -120,7 +140,17 @@ button {
   padding: 2rem;
   box-shadow: 2px 2px 20px rgba(104, 103, 103, 0.349);
   border-radius: 5px;
-  width: 40%;
+  min-width: 40%;
+  max-width: 70%;
+}
+
+@media only screen and (max-width: 26.5rem) {
+  .section-login,
+  .section-signup,
+  .section-ask,
+  .section-questions {
+    padding: 0;
+  }
 }
 
 .form > *:not(:last-child) {
@@ -199,7 +229,7 @@ button {
 
 .hero {
   background-color: rgb(243, 237, 243);
-  height: 70vh;
+  height: 50vh;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -213,8 +243,46 @@ button {
   margin-bottom: 4rem;
 }
 
+@media only screen and (max-width: 55rem) {
+  .hero h1 {
+    font-size: 3.5rem;
+  }
+}
+@media only screen and (max-width: 37.5rem) {
+  .hero h1 {
+    width: 80%;
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 29.5rem) {
+  .hero {
+    padding: 0;
+    padding: 10rem 0 0 0;
+    align-items: center;
+    width: 100%;
+    font-size: 1.6rem;
+  }
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+  .header-btns {
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    /* background-color: red; */
+  }
+}
+
 .questions__list {
   width: 60%;
+}
+@media only screen and (max-width: 20rem) {
+  .header-btns {
+    flex-direction: column;
+  }
+  .test {
+    margin-bottom: 1rem;
+  }
 }
 
 .questions__list > *:not(:last-child) {
@@ -260,4 +328,7 @@ button {
   font-weight: inherit;
   height: 20rem;
   margin-bottom: 1rem;
+}
+.copyright {
+  text-align: center;
 }

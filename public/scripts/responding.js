@@ -6,7 +6,6 @@ const likeBtn = document.querySelectorAll(".questions__like");
 
 export const toggleResponse = responseShow?.forEach((t) => {
   t?.addEventListener("click", (e) => {
-    console.log(e.target.dataset);
     responseForm?.forEach((k) => {
       if (k.dataset.questionid !== e.target.dataset.id) return;
       k.classList.toggle("hidden");
@@ -38,15 +37,12 @@ export const responding = responseForm?.forEach((t) => {
         }
       );
       const data = await res.json();
-      console.log(res, data);
     } catch (err) {}
   });
 });
 
 export const sendRes = sendResponse?.forEach(function (r) {
   r?.addEventListener("click", async function () {
-    console.log(responseContent);
-
     const responseCon = Array.from(responseContent).find(function (z) {
       return z.dataset.questionid === r.dataset.questionid;
     });
@@ -71,7 +67,6 @@ export const sendRes = sendResponse?.forEach(function (r) {
 
 likeBtn?.forEach((t) => {
   t?.addEventListener("click", async function () {
-    console.log(this.dataset);
     if (this.dataset.user === this.dataset.userid)
       return console.log("you can not like your question");
     const res = await fetch(
@@ -84,6 +79,5 @@ likeBtn?.forEach((t) => {
         body: JSON.stringify({ dist: this.dataset.dist }),
       }
     );
-    console.log(res);
   });
 });

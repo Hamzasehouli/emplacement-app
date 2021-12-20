@@ -3,8 +3,6 @@ const Response = require("../models/responseModel");
 exports.postResponse = async function (req, res, next) {
   try {
     const { content, dist } = req.body;
-    console.log(req.user);
-    console.log(req.params.userId);
 
     if (!content.trim()) {
       return console.log("content is missing");

@@ -48,8 +48,6 @@ router.get("/favorites", async (req, res, next) => {
     user: req.user._id,
   }).populate("question");
 
-  // const results = favorites.aggregate([{}]);
-  console.log(favorites);
   res.status(200).render("_favorites", {
     title: "Favorite questions",
     favorites,
@@ -110,18 +108,14 @@ router.get("/search/lng/:lng/lat/:lat/page/:page", async (req, res, next) => {
       },
     },
   ]);
-  console.log(req.params);
+
   let page = req.params.page ?? 1;
   const limit = 10;
   const numberOfDocs = questions.length;
   const numberOfPages = Math.ceil(numberOfDocs / limit);
   const skip = limit * (page * 1 - 1);
-  console.log(page, "page");
-  console.log(skip, "skip");
-  console.log(numberOfPages, "numberOfPages");
-  console.log(numberOfDocs, "numberOfDocs");
+
   const rawQuestions = questions.slice(skip, skip + limit);
-  console.log(rawQuestions);
 
   res.status(200).render("_questions", {
     title: "Questions",
@@ -139,28 +133,17 @@ router.get("/favorites", async function (req, res, next) {
   const favorites = await Favorite.find({ user: req.user._id }).populate(
     "question"
   );
-  console.log(favorites);
+
   res
     .status(200)
     .render("_favorites", { title: "Favorites", questions: favorites });
 });
 
 router.get("/questions/:questionid", async function (req, res, next) {
-  // console.log(req.params.questionid);
-  // if (!req.user) {
-  //   res.status(200).render("_login");
-  //   return;
-  // }
-
-  // if (!req.params.questionid) {
-  //   res.status(200).render("_errorPage");
-  //   return;
-  // }
-
   const question = await Question.findById(req.params.questionid)
     .populate("responses")
     .populate("user");
-  console.log(question);
+
   res.status(200).render("_question", { question });
 });
 

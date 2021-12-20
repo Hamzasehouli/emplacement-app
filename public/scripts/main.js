@@ -2,7 +2,7 @@ import signup from "./signup.js";
 import login from "./login.js";
 import askquestion from "./askquestion.js";
 import logout from "./logout.js";
-import searchQuestion from "./searchQuestion.js";
+import searchQuestion, { searchForm } from "./searchQuestion.js";
 import { prev, nex } from "./paginate.js";
 import { responding, toggleResponse, sendRes } from "./responding.js";
 

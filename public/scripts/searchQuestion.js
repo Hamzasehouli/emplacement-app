@@ -1,4 +1,9 @@
 const searchInput = document.querySelector(".searchInput");
+const formSearch = document.querySelector(".form-search");
+
+export const searchForm = formSearch?.addEventListener("submit", (e) =>
+  e.preventDefault()
+);
 
 document.querySelector(".search__list").innerHTML = "";
 
@@ -8,14 +13,14 @@ export default searchInput?.addEventListener("input", async function (e) {
     document.querySelector(".search__list").innerHTML = "";
     return;
   }
-  console.log(this.dataset.userid, "sss");
+
   document.querySelector(".search__list").innerHTML = "...fetching";
 
   const res = await fetch(
     `http://localhost:3000/api/v1/users/${this.dataset.userid}/questions?term=${this.value}`
   );
   const data = await res.json();
-  console.log(data);
+
   if (data.data.questions.length === 0) {
     return (document.querySelector(".search__list").innerHTML =
       "No question found");
@@ -30,7 +35,7 @@ export default searchInput?.addEventListener("input", async function (e) {
     </li>`;
     })
     .join("")}`;
-  console.log(markup);
+
   document.querySelector(".search__list").innerHTML = "";
   document
     .querySelector(".search__list")

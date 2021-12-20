@@ -26,22 +26,16 @@ export default askForm?.addEventListener("submit", async (e) => {
       askBtn.innerText = "Add";
     }
 
-    // console.log(title.value, content.value);
-    // console.log(askForm.dataset.userid);
-
     const po = await new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((po) => {
         return resolve(po);
       });
     });
-    // console.log(po.coords);
 
     const { latitude, longitude } = po.coords;
 
     if ((!isTitleCorrect && !isContentCorrect) || !latitude || !longitude)
       return;
-    console.log(askForm.dataset.userid);
-    // console.log(longitude);
 
     const res = await fetch(
       `http://localhost:3000/api/v1/users/${askForm.dataset.userid}/latitude/${latitude}/longitude/${longitude}/questions`,
@@ -53,7 +47,6 @@ export default askForm?.addEventListener("submit", async (e) => {
         body: JSON.stringify({ title: title.value, content: content.value }),
       }
     );
-    console.log(res);
 
     if (res.ok) {
       window.location.pathname = "/";

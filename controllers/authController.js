@@ -102,8 +102,6 @@ exports.isLoggedIn = async function (req, res, next) {
           next("User not found");
         }
 
-        // console.log(decoded.iat);
-        // console.log(new Date(user.passwordModifiedAt).getTime() / 1000);
         if (decoded.iat < new Date(user.passwordModifiedAt).getTime() / 1000) {
           next("not valid");
           return;
@@ -137,12 +135,6 @@ exports.getUser = async function (req, res, next) {
       return next();
     }
 
-    // console.log(decoded.iat);
-    // console.log(new Date(user.passwordModifiedAt).getTime() / 1000);
-    // if (decoded.iat < new Date(user.passwordModifiedAt).getTime() / 1000) {
-    //   console.log("not valid");
-    //   return;
-    // }
     req.user = user;
     res.locals.user = user;
     next();

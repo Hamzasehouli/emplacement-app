@@ -13,7 +13,6 @@ const type = "quotes";
 async function createIndex(index) {
   try {
     await esclient.indices.create({ index });
-    console.log(`Created index ${index}`);
   } catch (err) {
     console.error(`An error occurred while creating the index ${index}:`);
     console.error(err);
