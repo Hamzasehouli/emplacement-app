@@ -3,6 +3,23 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 
+const { Client } = require("@elastic/elasticsearch");
+
+const elasticUrl = "http://localhost:9200";
+const esclient = new Client({ node: elasticUrl });
+const index = "quotes";
+const type = "quotes";
+
+async function createIndex(index) {
+  try {
+    await esclient.indices.create({ index });
+    console.log(`Created index ${index}`);
+  } catch (err) {
+    console.error(`An error occurred while creating the index ${index}:`);
+    console.error(err);
+  }
+}
+
 var session = require("express-session");
 var Keycloak = require("keycloak-connect");
 

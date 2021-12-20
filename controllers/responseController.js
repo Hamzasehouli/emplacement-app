@@ -1,15 +1,22 @@
 const Response = require("../models/responseModel");
+
 exports.postResponse = async function (req, res, next) {
   try {
-    const { content } = req.body;
+    const { content, dist } = req.body;
+    console.log(req.user);
+    console.log(req.params.userId);
+
     if (!content.trim()) {
       return console.log("content is missing");
     }
+
     const response = await Response.create({
       content,
       question: req.params.questionId,
       user: req.params.userId,
+      dist,
     });
+
     res.status(201).json({
       status: "success",
       data: {

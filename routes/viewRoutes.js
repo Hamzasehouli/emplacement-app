@@ -1,6 +1,7 @@
 const express = require("express");
 const authController = require("../controllers/authController");
 const Question = require("../models/questionModel");
+const Favorite = require("../models/favoriteModel");
 
 const router = express.Router();
 
@@ -63,6 +64,20 @@ router.get("/search/lng/:lng/lat/:lat", async (req, res, next) => {
   console.log(questions);
 
   res.status(200).render("_questions", { title: "Questions", questions });
+});
+
+router.get("/favorites", async function (req, res, next) {
+  if (!req.user) {
+    res.status(200).render("_login");
+    return;
+  }
+  const favorites = await Favorite.find({ user: req.user._id }).populate(
+    "question"
+  );
+  console.log(favorites);
+  res
+    .status(200)
+    .render("_favorites", { title: "Favorites", questions: favorites });
 });
 
 module.exports = router;
