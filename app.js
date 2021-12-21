@@ -1,26 +1,26 @@
 const path = require("path");
 const express = require("express");
 const cookieParser = require("cookie-parser");
-var bodyParser = require("body-parser");
+// var bodyParser = require("body-parser");
 
-const { Client } = require("@elastic/elasticsearch");
+// const { Client } = require("@elastic/elasticsearch");
 
-const elasticUrl = "http://localhost:9200";
-const esclient = new Client({ node: elasticUrl });
-const index = "quotes";
-const type = "quotes";
+// const elasticUrl = "http://localhost:9200";
+// const esclient = new Client({ node: elasticUrl });
+// const index = "quotes";
+// const type = "quotes";
 
-async function createIndex(index) {
-  try {
-    await esclient.indices.create({ index });
-  } catch (err) {
-    console.error(`An error occurred while creating the index ${index}:`);
-    console.error(err);
-  }
-}
+// async function createIndex(index) {
+//   try {
+//     await esclient.indices.create({ index });
+//   } catch (err) {
+//     console.error(`An error occurred while creating the index ${index}:`);
+//     console.error(err);
+//   }
+// }
 
-var session = require("express-session");
-var Keycloak = require("keycloak-connect");
+// var session = require("express-session");
+// var Keycloak = require("keycloak-connect");
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
