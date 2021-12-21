@@ -17,7 +17,7 @@ export default searchInput?.addEventListener("input", async function (e) {
   document.querySelector(".search__list").innerHTML = "...fetching";
 
   const res = await fetch(
-    `http://localhost:3000/api/v1/users/${this.dataset.userid}/questions?term=${this.value}`
+    `/api/v1/users/${this.dataset.userid}/questions?term=${this.value}`
   );
   const data = await res.json();
 

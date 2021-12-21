@@ -38,7 +38,7 @@ export default askForm?.addEventListener("submit", async (e) => {
       return;
 
     const res = await fetch(
-      `http://localhost:3000/api/v1/users/${askForm.dataset.userid}/latitude/${latitude}/longitude/${longitude}/questions`,
+      `/api/v1/users/${askForm.dataset.userid}/latitude/${latitude}/longitude/${longitude}/questions`,
       {
         method: "POST",
         headers: {

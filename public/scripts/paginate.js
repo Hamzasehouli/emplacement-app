@@ -24,11 +24,11 @@ export const prev = leftBtn?.addEventListener("click", async function () {
   //   await fetch(
   //     `http://localhost:3000/search/lng/${longitude}/lat/${latitude}/page/${page}`
   //   );
-  window.location.href = `http://localhost:3000/search/lng/${longitude}/lat/${latitude}/page/${page}`;
+  window.location.href = `/search/lng/${longitude}/lat/${latitude}/page/${page}`;
 });
 
 export const nex = rightBtn?.addEventListener("click", function () {
   page++;
 
-  window.location.href = `http://localhost:3000/search/lng/${longitude}/lat/${latitude}/page/${page}`;
+  window.location.href = `/search/lng/${longitude}/lat/${latitude}/page/${page}`;
 });

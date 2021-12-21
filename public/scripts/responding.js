@@ -27,7 +27,7 @@ export const responding = responseForm?.forEach((t) => {
         throw "Please response must not be empty";
       }
       const res = await fetch(
-        `http://localhost:3000/api/v1/users/${userId}/questions/${questionId}/responses`,
+        `/api/v1/users/${userId}/questions/${questionId}/responses`,
         {
           method: "POST",
           headers: {
@@ -48,7 +48,7 @@ export const sendRes = sendResponse?.forEach(function (r) {
     });
 
     const res = await fetch(
-      `http://localhost:3000/api/v1/users/${r.dataset.userid}/questions/${r.dataset.questionid}/responses`,
+      `/api/v1/users/${r.dataset.userid}/questions/${r.dataset.questionid}/responses`,
       {
         method: "POST",
         headers: {
@@ -70,7 +70,7 @@ likeBtn?.forEach((t) => {
     if (this.dataset.user === this.dataset.userid)
       return console.log("you can not like your question");
     const res = await fetch(
-      `http://localhost:3000/api/v1/users/${this.dataset.userid}/questions/${this.dataset.questionid}/favorites`,
+      `/api/v1/users/${this.dataset.userid}/questions/${this.dataset.questionid}/favorites`,
       {
         method: "POST",
         headers: {

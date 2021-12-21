@@ -29,7 +29,7 @@ export default loginForm?.addEventListener("submit", async (e) => {
 
     if (!isEmailCorrect && !isPasswordCorrect) return;
 
-    const res = await fetch("http://localhost:3000/api/v1/auth/login", {
+    const res = await fetch("/api/v1/auth/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",

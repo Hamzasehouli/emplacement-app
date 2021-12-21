@@ -16,6 +16,6 @@ test?.addEventListener("click", async () => {
     });
 
     const { latitude, longitude } = po.coords;
-    window.location.href = `http://localhost:3000/search/lng/${longitude}/lat/${latitude}/page/1`;
+    window.location.href = `/search/lng/${longitude}/lat/${latitude}/page/1`;
   }
 });
